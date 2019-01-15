@@ -14,7 +14,7 @@ before_script:
   - ./flutter/bin/flutter packages get
 script:
   - ./flutter/bin/flutter test --coverage
-after_success: bash < (curl -s https://codecov.io/bash)
+after_success: bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info
 cache:
   directories:
     - $HOME/.pub-cache
