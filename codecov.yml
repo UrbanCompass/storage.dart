@@ -1,0 +1,11 @@
+ignore:
+  - "android"
+  - "example"
+  - "ios"
+coverage:
+  status:
+    project:
+      default:
+        against: parent
+        target: auto
+        threshold: 1%
