@@ -10,11 +10,10 @@ addons:
       - fonts-droid
 before_script:
   - git clone https://github.com/flutter/flutter.git -b beta --depth 1
-  - ./flutter/bin/flutter doctor
   - ./flutter/bin/flutter packages get
 script:
-  - ./flutter/bin/flutter test
-after_success: bash < (curl -s https://codecov.io/bash)
+  - ./flutter/bin/flutter test --coverage
+after_success: bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info
 cache:
   directories:
     - $HOME/.pub-cache
