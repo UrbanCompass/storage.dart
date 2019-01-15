@@ -1,6 +1,8 @@
+[![codecov](https://codecov.io/gh/UrbanCompass/storage.dart/branch/master/graph/badge.svg)](https://codecov.io/gh/UrbanCompass/storage.dart)
+
 # storage
 
-A new flutter plugin project.
+A flutter plugin for storing things :)
 
 ## Getting Started
 
@@ -9,6 +11,6 @@ This project is a starting point for a Flutter
 a specialized package that includes platform-specific implementation code for
 Android and/or iOS.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
+For help getting started with Flutter, view our
+[online documentation](https://flutter.io/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
