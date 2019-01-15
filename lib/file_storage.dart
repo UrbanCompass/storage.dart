@@ -1,11 +1,13 @@
+//  Copyright © 2019 Compass. All rights reserved.
+
 import 'dart:io';
 
-import 'package:storage/store.dart';
+import 'package:storage/storage_container.dart';
 
-class FileStore extends Store {
+class FileStorage extends StorageContainer {
   String _basePath;
 
-  FileStore(this._basePath);
+  FileStorage(this._basePath);
 
   @override
   bool exists(String key) {

@@ -1,12 +1,14 @@
-import 'package:storage/memory_store.dart';
+//  Copyright © 2019 Compass. All rights reserved.
+
+import 'package:storage/memory_storage.dart';
 import 'package:test_api/test_api.dart';
 
 void main() {
-  group('Memory Store', () {
-    MemoryStore store;
+  group('Memory Storage', () {
+    MemoryStorage store;
 
     setUpAll(() async {
-      store = MemoryStore();
+      store = MemoryStorage();
     });
 
     test('does not exist', () {

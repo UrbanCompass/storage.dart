@@ -1,6 +1,8 @@
-import 'package:storage/store.dart';
+//  Copyright © 2019 Compass. All rights reserved.
 
-class MemoryStore extends Store {
+import 'package:storage/storage_container.dart';
+
+class MemoryStorage extends StorageContainer {
   final map = Map<String, List<int>>();
 
   @override
