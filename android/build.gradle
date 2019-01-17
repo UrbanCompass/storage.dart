@@ -1,4 +1,4 @@
-group 'com.example.storage'
+group 'com.compass.storage'
 version '1.0-SNAPSHOT'
 
 buildscript {

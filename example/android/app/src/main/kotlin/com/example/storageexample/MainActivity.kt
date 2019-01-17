@@ -1,4 +1,4 @@
-package com.example.storageexample
+package com.compass.storageexample
 
 import android.os.Bundle
 
