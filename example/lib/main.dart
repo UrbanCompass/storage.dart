@@ -14,16 +14,24 @@ class _StorageAppState extends State<StorageApp> {
   bool _isLoading = true;
   int _fileValue = 0;
   int _memoryValue = 0;
+  int _prefsValue = 0;
 
   final _fileKey = 'fileKey';
   final _memoryKey = 'memoryKey';
+  final _prefsKey = 'prefsKey';
 
   @override
   void initState() {
     Storage.configure().then((configured) {
-      Storage.file.get(_fileKey).then((data) {
+      Storage.file.getInt(_fileKey).then((value) {
         setState(() {
-          _fileValue = data?.first ?? 0;
+          _fileValue = value ?? 0;
+          _isLoading = false;
+        });
+      });
+      Storage.preferences.getInt(_prefsKey).then((value) {
+        setState(() {
+          _prefsValue = value ?? 0;
           _isLoading = false;
         });
       });
@@ -48,7 +56,8 @@ class _StorageAppState extends State<StorageApp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text('Storage file value $_fileValue'),
-                      Text('Storage memory value $_memoryValue')
+                      Text('Storage memory value $_memoryValue'),
+                      Text('Storage preferences value $_prefsValue')
                     ],
                   ),
                 ),
@@ -69,25 +78,41 @@ class _StorageAppState extends State<StorageApp> {
                   _incrementMemory();
                 },
               ),
+              SizedBox(height: 10),
+              FloatingActionButton(
+                child: Icon(Icons.playlist_add),
+                onPressed: () {
+                  _incrementPrefs();
+                },
+              ),
             ],
           )),
     );
   }
 
   _incrementFile() async {
-    await Storage.file.set(_fileKey, [_fileValue + 1]);
-    Storage.file.get(_fileKey).then((data) {
+    await Storage.file.setInt(_fileKey, _fileValue + 1);
+    Storage.file.getInt(_fileKey).then((value) {
       setState(() {
-        _fileValue = data.first;
+        _fileValue = value;
       });
     });
   }
 
   _incrementMemory() async {
-    await Storage.memory.set(_memoryKey, [_memoryValue + 1]);
-    Storage.memory.get(_memoryKey).then((data) {
+    await Storage.memory.setInt(_memoryKey, _memoryValue + 1);
+    Storage.memory.getInt(_memoryKey).then((value) {
       setState(() {
-        _memoryValue = data.first;
+        _memoryValue = value;
+      });
+    });
+  }
+
+  _incrementPrefs() async {
+    await Storage.preferences.setInt(_prefsKey, _prefsValue + 1);
+    Storage.preferences.getInt(_prefsKey).then((value) {
+      setState(() {
+        _prefsValue = value;
       });
     });
   }

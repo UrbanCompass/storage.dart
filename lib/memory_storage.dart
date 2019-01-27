@@ -3,20 +3,76 @@
 import 'package:storage/storage_container.dart';
 
 class MemoryStorage extends StorageContainer {
-  final map = Map<String, List<int>>();
+  final map = Map<String, dynamic>();
 
   @override
-  bool exists(String key) {
-    return map[key] != null;
-  }
-
-  @override
-  Future<List<int>> get(String key) async {
+  Future<bool> getBool(String key) async {
     return map[key];
   }
 
   @override
-  Future<Null> set(String key, List<int> data) async {
-    map[key] = data;
+  Future<List<int>> getData(String key) async {
+    return map[key];
+  }
+
+  @override
+  Future<double> getDouble(String key) async {
+    return map[key];
+  }
+
+  @override
+  Future<int> getInt(String key) async {
+    return map[key];
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMap(String key) async {
+    return map[key];
+  }
+
+  @override
+  Future<String> getString(String key) async {
+    return map[key];
+  }
+
+  @override
+  Future<bool> setBool(String key, bool value) async {
+    map[key] = value;
+    return true;
+  }
+
+  @override
+  Future<bool> setData(String key, List<int> value) async {
+    map[key] = value;
+    return true;
+  }
+
+  @override
+  Future<bool> setDouble(String key, double value) async {
+    map[key] = value;
+    return true;
+  }
+
+  @override
+  Future<bool> setInt(String key, int value) async {
+    map[key] = value;
+    return true;
+  }
+
+  @override
+  Future<bool> setMap(String key, Map<String, dynamic> value) async {
+    map[key] = value;
+    return true;
+  }
+
+  @override
+  Future<bool> setString(String key, String value) async {
+    map[key] = value;
+    return true;
+  }
+
+  @override
+  bool exists(String key) {
+    return map[key] != null;
   }
 }
