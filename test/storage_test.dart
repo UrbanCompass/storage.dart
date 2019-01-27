@@ -9,13 +9,20 @@ import 'package:uuid/uuid.dart';
 
 void main() {
   final testData = List<int>.generate(10, (i) => i + 1);
-  const MethodChannel channel =
-      MethodChannel('plugins.flutter.io/path_provider');
-
   String mockPath;
+  Map<String, dynamic> preferences = {};
 
-  channel.setMockMethodCallHandler((MethodCall methodCall) async {
+  const MethodChannel('plugins.flutter.io/path_provider')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
     return mockPath;
+  });
+
+  const MethodChannel('plugins.flutter.io/shared_preferences')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
+    if (methodCall.method == 'getAll') {
+      return preferences;
+    }
+    return null;
   });
 
   group('Storage', () {
@@ -61,6 +68,22 @@ void main() {
         expect(await Storage.memory.get(key), null);
         await Storage.memory.set(key, testData);
         expect(await Storage.memory.get(key), testData);
+      });
+    });
+
+    group('Preferences', () {
+      test('throws if not configured', () {
+        Storage.resetConfiguration();
+        expect(() => Storage.preferences.get('test'), throwsStateError);
+      });
+
+      test('can set and get', () async {
+        final key = Uuid().v4();
+
+        await Storage.configure(testing: true);
+        expect(await Storage.preferences.get(key), null);
+        await Storage.preferences.set(key, testData);
+        expect(await Storage.preferences.get(key), testData);
       });
     });
   });
