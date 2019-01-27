@@ -42,48 +42,48 @@ void main() {
     group('FileStorage', () {
       test('throws if not configured', () {
         Storage.resetConfiguration();
-        expect(() => Storage.file.get('test'), throwsStateError);
+        expect(() => Storage.file.getData('test'), throwsStateError);
       });
 
       test('can set and get', () async {
         final key = Uuid().v4();
 
         await Storage.configure(testing: true);
-        expect(await Storage.file.get(key), null);
-        await Storage.file.set(key, testData);
-        expect(await Storage.file.get(key), testData);
+        expect(await Storage.file.getData(key), null);
+        await Storage.file.setData(key, testData);
+        expect(await Storage.file.getData(key), testData);
       });
     });
 
     group('MemoryStorage', () {
       test('throws if not configured', () {
         Storage.resetConfiguration();
-        expect(() => Storage.memory.get('test'), throwsStateError);
+        expect(() => Storage.memory.getData('test'), throwsStateError);
       });
 
       test('can set and get', () async {
         final key = Uuid().v4();
 
         await Storage.configure(testing: true);
-        expect(await Storage.memory.get(key), null);
-        await Storage.memory.set(key, testData);
-        expect(await Storage.memory.get(key), testData);
+        expect(await Storage.memory.getData(key), null);
+        await Storage.memory.setData(key, testData);
+        expect(await Storage.memory.getData(key), testData);
       });
     });
 
     group('Preferences', () {
       test('throws if not configured', () {
         Storage.resetConfiguration();
-        expect(() => Storage.preferences.get('test'), throwsStateError);
+        expect(() => Storage.preferences.getData('test'), throwsStateError);
       });
 
       test('can set and get', () async {
         final key = Uuid().v4();
 
         await Storage.configure(testing: true);
-        expect(await Storage.preferences.get(key), null);
-        await Storage.preferences.set(key, testData);
-        expect(await Storage.preferences.get(key), testData);
+        expect(await Storage.preferences.getData(key), null);
+        await Storage.preferences.setData(key, testData);
+        expect(await Storage.preferences.getData(key), testData);
       });
     });
   });

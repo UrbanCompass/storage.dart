@@ -1,5 +1,6 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:storage/storage_container.dart';
@@ -10,12 +11,13 @@ class FileStorage extends StorageContainer {
   FileStorage(this._basePath);
 
   @override
-  bool exists(String key) {
-    return _file(key: key).existsSync();
+  Future<bool> getBool(String key) async {
+    final string = await getString(key);
+    return string != null ? json.decode(string) : null;
   }
 
   @override
-  Future<List<int>> get(String key) async {
+  Future<List<int>> getData(String key) async {
     try {
       return await _file(key: key).readAsBytes();
     } catch (e) {
@@ -24,8 +26,64 @@ class FileStorage extends StorageContainer {
   }
 
   @override
-  Future<Null> set(String key, List<int> data) async {
-    await _file(key: key).writeAsBytes(data);
+  Future<double> getDouble(String key) async {
+    final string = await getString(key);
+    return string != null ? json.decode(string) : null;
+  }
+
+  @override
+  Future<int> getInt(String key) async {
+    final string = await getString(key);
+    return string != null ? json.decode(string) : null;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getMap(String key) async {
+    final string = await getString(key);
+    return string != null ? json.decode(string) : null;
+  }
+
+  @override
+  Future<String> getString(String key) {
+    if (!exists(key)) {
+      return null;
+    }
+    return _file(key: key).readAsString(encoding: utf8);
+  }
+
+  @override
+  Future<bool> setBool(String key, bool value) async {
+    return setString(key, json.encode(value));
+  }
+
+  @override
+  Future<bool> setData(String key, List<int> value) async {
+    return await _file(key: key).writeAsBytes(value) != null;
+  }
+
+  @override
+  Future<bool> setDouble(String key, double value) {
+    return setString(key, json.encode(value));
+  }
+
+  @override
+  Future<bool> setInt(String key, int value) {
+    return setString(key, json.encode(value));
+  }
+
+  @override
+  Future<bool> setMap(String key, Map<String, dynamic> value) {
+    return setString(key, json.encode(value));
+  }
+
+  @override
+  Future<bool> setString(String key, String value) async {
+    return await _file(key: key).writeAsString(value, encoding: utf8) != null;
+  }
+
+  @override
+  bool exists(String key) {
+    return _file(key: key).existsSync();
   }
 
   File _file({String key}) {
