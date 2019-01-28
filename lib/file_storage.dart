@@ -44,8 +44,8 @@ class FileStorage extends StorageContainer {
   }
 
   @override
-  Future<String> getString(String key) {
-    if (!exists(key)) {
+  Future<String> getString(String key) async {
+    if (!await exists(key)) {
       return null;
     }
     return _file(key: key).readAsString(encoding: utf8);
@@ -53,7 +53,7 @@ class FileStorage extends StorageContainer {
 
   @override
   Future<bool> setBool(String key, bool value) async {
-    return setString(key, json.encode(value));
+    return await setString(key, json.encode(value));
   }
 
   @override
@@ -62,18 +62,18 @@ class FileStorage extends StorageContainer {
   }
 
   @override
-  Future<bool> setDouble(String key, double value) {
-    return setString(key, json.encode(value));
+  Future<bool> setDouble(String key, double value) async {
+    return await setString(key, json.encode(value));
   }
 
   @override
-  Future<bool> setInt(String key, int value) {
-    return setString(key, json.encode(value));
+  Future<bool> setInt(String key, int value) async {
+    return await setString(key, json.encode(value));
   }
 
   @override
-  Future<bool> setMap(String key, Map<String, dynamic> value) {
-    return setString(key, json.encode(value));
+  Future<bool> setMap(String key, Map<String, dynamic> value) async {
+    return await setString(key, json.encode(value));
   }
 
   @override
@@ -82,8 +82,8 @@ class FileStorage extends StorageContainer {
   }
 
   @override
-  bool exists(String key) {
-    return _file(key: key).existsSync();
+  Future<bool> exists(String key) async {
+    return _file(key: key).exists();
   }
 
   File _file({String key}) {

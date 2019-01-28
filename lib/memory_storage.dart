@@ -72,7 +72,7 @@ class MemoryStorage extends StorageContainer {
   }
 
   @override
-  bool exists(String key) {
+  Future<bool> exists(String key) async {
     return map[key] != null;
   }
 }

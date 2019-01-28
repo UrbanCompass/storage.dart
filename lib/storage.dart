@@ -1,12 +1,14 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
 import 'dart:io';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:storage/file_storage.dart';
 import 'package:storage/memory_storage.dart';
 import 'package:storage/preferences_storage.dart';
+import 'package:storage/secure_storage.dart';
 
 export 'file_storage.dart';
 export 'memory_storage.dart';
@@ -16,6 +18,7 @@ class Storage {
   static FileStorage _fileStorage;
   static MemoryStorage _memoryStorage;
   static PreferencesStorage _preferencesStorage;
+  static SecureStorage _secureStorage;
 
   static bool get isConfigured => _configured;
 
@@ -34,6 +37,11 @@ class Storage {
     return _preferencesStorage;
   }
 
+  static SecureStorage get secure {
+    _verifyConfigured();
+    return _secureStorage;
+  }
+
   static Future<bool> configure({bool testing}) async {
     Directory fileStorageDirectory;
 
@@ -48,6 +56,7 @@ class Storage {
     _memoryStorage = MemoryStorage();
     _preferencesStorage =
         PreferencesStorage(prefs: await SharedPreferences.getInstance());
+    _secureStorage = SecureStorage(storage: FlutterSecureStorage());
 
     _configured = true;
     return _configured;

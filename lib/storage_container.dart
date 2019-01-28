@@ -19,5 +19,5 @@ abstract class StorageContainer {
   Future<List<int>> getData(String key);
   Future<bool> setData(String key, List<int> value);
 
-  bool exists(String key);
+  Future<bool> exists(String key);
 }

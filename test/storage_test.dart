@@ -25,6 +25,11 @@ void main() {
     return null;
   });
 
+  const MethodChannel('plugins.it_nomads.com/flutter_secure_storage')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
+    return null;
+  });
+
   group('Storage', () {
     test('is not configured', () {
       Storage.resetConfiguration();

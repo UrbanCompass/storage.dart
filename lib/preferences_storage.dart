@@ -74,7 +74,7 @@ class PreferencesStorage extends StorageContainer {
   }
 
   @override
-  bool exists(String key) {
+  Future<bool> exists(String key) async {
     return prefs.getKeys().contains(key);
   }
 }

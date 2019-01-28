@@ -15,25 +15,22 @@ class _StorageAppState extends State<StorageApp> {
   int _fileValue = 0;
   int _memoryValue = 0;
   int _prefsValue = 0;
+  int _secureValue = 0;
 
   final _fileKey = 'fileKey';
   final _memoryKey = 'memoryKey';
   final _prefsKey = 'prefsKey';
+  final _secureKey = 'secureKey';
 
   @override
   void initState() {
-    Storage.configure().then((configured) {
-      Storage.file.getInt(_fileKey).then((value) {
-        setState(() {
-          _fileValue = value ?? 0;
-          _isLoading = false;
-        });
-      });
-      Storage.preferences.getInt(_prefsKey).then((value) {
-        setState(() {
-          _prefsValue = value ?? 0;
-          _isLoading = false;
-        });
+    Storage.configure().then((configured) async {
+      _fileValue = await Storage.file.getInt(_fileKey) ?? 0;
+      _memoryValue = await Storage.memory.getInt(_memoryKey) ?? 0;
+      _prefsValue = await Storage.preferences.getInt(_prefsKey) ?? 0;
+      _secureValue = await Storage.secure.getInt(_secureKey) ?? 0;
+      setState(() {
+        _isLoading = false;
       });
     });
 
@@ -57,7 +54,8 @@ class _StorageAppState extends State<StorageApp> {
                     children: <Widget>[
                       Text('Storage file value $_fileValue'),
                       Text('Storage memory value $_memoryValue'),
-                      Text('Storage preferences value $_prefsValue')
+                      Text('Storage preferences value $_prefsValue'),
+                      Text('Storage secure value $_secureValue')
                     ],
                   ),
                 ),
@@ -83,6 +81,13 @@ class _StorageAppState extends State<StorageApp> {
                 child: Icon(Icons.playlist_add),
                 onPressed: () {
                   _incrementPrefs();
+                },
+              ),
+              SizedBox(height: 10),
+              FloatingActionButton(
+                child: Icon(Icons.lock),
+                onPressed: () {
+                  _incrementSecure();
                 },
               ),
             ],
@@ -113,6 +118,15 @@ class _StorageAppState extends State<StorageApp> {
     Storage.preferences.getInt(_prefsKey).then((value) {
       setState(() {
         _prefsValue = value;
+      });
+    });
+  }
+
+  _incrementSecure() async {
+    await Storage.secure.setInt(_secureKey, _secureValue + 1);
+    Storage.secure.getInt(_secureKey).then((value) {
+      setState(() {
+        _secureValue = value;
       });
     });
   }
