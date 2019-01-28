@@ -7,11 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:storage/file_storage.dart';
 import 'package:storage/memory_storage.dart';
+import 'package:storage/mocks/mock_secure.dart';
 import 'package:storage/preferences_storage.dart';
 import 'package:storage/secure_storage.dart';
 
 export 'file_storage.dart';
 export 'memory_storage.dart';
+export 'preferences_storage.dart';
+export 'secure_storage.dart';
 
 class Storage {
   static bool _configured = false;
@@ -56,7 +59,12 @@ class Storage {
     _memoryStorage = MemoryStorage();
     _preferencesStorage =
         PreferencesStorage(prefs: await SharedPreferences.getInstance());
-    _secureStorage = SecureStorage(storage: FlutterSecureStorage());
+
+    if (testing) {
+      _secureStorage = SecureStorage(storage: MockSecure());
+    } else {
+      _secureStorage = SecureStorage(storage: FlutterSecureStorage());
+    }
 
     _configured = true;
     return _configured;
