@@ -34,9 +34,14 @@ build/
 **/android/.gradle
 **/android/captures/
 **/android/gradlew
+**/android/gradle
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
+**/android/**/.classpath
+**/android/**/.project
+**/android/**/.cproject
+**/android/**/.settings/
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
