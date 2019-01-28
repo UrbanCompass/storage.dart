@@ -1,4 +1,4 @@
-[![travis](https://travis-ci.org/UrbanCompass/storage.dart.svg?branch=master)](https://travis-ci.org/UrbanCompass/storage.dart)
+[![bitrise](https://app.bitrise.io/app/dd31a8bace658d96/status.svg?token=nPMahPdU4U5Rn65wKeOI8g&branch=master)](https://travis-ci.org/UrbanCompass/storage.dart)
 [![codecov](https://codecov.io/gh/UrbanCompass/storage.dart/branch/master/graph/badge.svg)](https://codecov.io/gh/UrbanCompass/storage.dart)
 
 # storage
