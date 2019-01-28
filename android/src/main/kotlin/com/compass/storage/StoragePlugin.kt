@@ -1,4 +1,4 @@
-package com.example.storage
+package com.compass.storage
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
