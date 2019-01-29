@@ -91,5 +91,21 @@ void main() {
         expect(await Storage.preferences.getData(key), testData);
       });
     });
+
+    group('Secure', () {
+      test('throws if not configured', () {
+        Storage.resetConfiguration();
+        expect(() => Storage.secure.getData('test'), throwsStateError);
+      });
+
+      test('can set and get', () async {
+        final key = Uuid().v4();
+
+        await Storage.configure(testing: true);
+        expect(await Storage.secure.getData(key), null);
+        await Storage.secure.setData(key, testData);
+        expect(await Storage.secure.getData(key), testData);
+      });
+    });
   });
 }
