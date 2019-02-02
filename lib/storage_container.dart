@@ -1,5 +1,7 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
+import 'dart:async';
+
 abstract class StorageContainer {
   Future<bool> getBool(String key);
   Future<bool> setBool(String key, bool value);
