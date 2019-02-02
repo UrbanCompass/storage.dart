@@ -46,7 +46,7 @@ class Storage {
     return _secureStorage;
   }
 
-  static Future<bool> configure({bool testing}) async {
+  static Future<bool> configure({bool testing = false}) async {
     Directory fileStorageDirectory;
 
     if (testing == true) {
