@@ -1,5 +1,6 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';

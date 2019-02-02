@@ -1,5 +1,7 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
+import 'dart:async';
+
 import 'package:storage/storage_container.dart';
 
 class MemoryStorage extends StorageContainer {
