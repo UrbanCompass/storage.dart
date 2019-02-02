@@ -41,7 +41,7 @@ void main() {
       final mockDirectory =
           await Directory.systemTemp.createTemp('__mock_directory__');
       mockPath = mockDirectory.path;
-      expect(await Storage.configure(testing: false), true);
+      expect(await Storage.configure(), true);
     });
 
     group('FileStorage', () {
