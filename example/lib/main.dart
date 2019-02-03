@@ -50,12 +50,12 @@ class _StorageAppState extends State<StorageApp> {
                 )
               : Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text('Storage file value $_fileValue'),
-                      Text('Storage memory value $_memoryValue'),
-                      Text('Storage preferences value $_prefsValue'),
-                      Text('Storage secure value $_secureValue')
+                      _card('file', _fileValue),
+                      _card('memory', _memoryValue),
+                      _card('preferences', _prefsValue),
+                      _card('secure', _secureValue),
                     ],
                   ),
                 ),
@@ -93,6 +93,12 @@ class _StorageAppState extends State<StorageApp> {
             ],
           )),
     );
+  }
+
+  Widget _card(String name, int value) {
+    return ListTile(
+        title: Text('Storage $name value:'),
+        trailing: Chip(label: Text('$value')));
   }
 
   _incrementFile() async {
