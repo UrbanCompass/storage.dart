@@ -16,6 +16,7 @@ export 'file_storage.dart';
 export 'memory_storage.dart';
 export 'preferences_storage.dart';
 export 'secure_storage.dart';
+export 'storage_container.dart';
 
 class Storage {
   static bool _configured = false;
