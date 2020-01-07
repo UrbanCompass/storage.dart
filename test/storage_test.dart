@@ -3,11 +3,13 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:storage/storage.dart';
-import 'package:test_api/test_api.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   final testData = List<int>.generate(10, (i) => i + 1);
   String mockPath;
   Map<String, dynamic> preferences = {};

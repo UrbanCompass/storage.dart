@@ -1,11 +1,13 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
 import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:storage/preferences_storage.dart';
-import 'package:test_api/test_api.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   Map<String, dynamic> preferences = {};
 
   const MethodChannel('plugins.flutter.io/shared_preferences')

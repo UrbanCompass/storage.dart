@@ -1,7 +1,7 @@
 //  Copyright © 2019 Compass. All rights reserved.
 
+import 'package:flutter_test/flutter_test.dart';
 import 'package:storage/memory_storage.dart';
-import 'package:test_api/test_api.dart';
 
 void main() {
   group('Memory Storage', () {
